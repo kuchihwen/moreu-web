@@ -65,7 +65,7 @@ main { animation: page-enter .72s cubic-bezier(.22,.75,.25,1) both; }
 .poster-art i { position:absolute; z-index:3; background:#8bd1ff; width:9px; height:9px; border:2px solid #1758c7; }
 .poster-art i:nth-of-type(1){left:13%;top:44%}.poster-art i:nth-of-type(2){right:13%;top:44%}.poster-art i:nth-of-type(3){left:49%;bottom:12%}
 .maker-art { background: #ddd7ef; }
-.maker-photo { position: absolute; inset: 0 0 13% 0; background: linear-gradient(120deg,transparent 0 30%,rgba(17,80,100,.2) 30%), url('/images/cinematic-valley.png') center/cover; filter: sepia(.4) saturate(.7) brightness(1.2); }
+.maker-photo { position: absolute; inset: 0 0 13% 0; background-position: center; background-size: cover; filter: sepia(.4) saturate(.7) brightness(1.2); }
 .maker-grid { position: absolute; inset: 64% 0 0; opacity:.5; background-image: linear-gradient(#4462ff 1px, transparent 1px),linear-gradient(90deg,#4462ff 1px,transparent 1px); background-size: 15px 15px; }
 .product-art { background: radial-gradient(circle at 70% 24%,rgba(255,255,255,.7),transparent 25%),linear-gradient(160deg,#748235,#1f2c20); }
 .product-art::after { content:""; position:absolute; inset:55% 0 0; background:linear-gradient(90deg,#544e37,#d3cbb1,#55513b); }

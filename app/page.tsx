@@ -4,6 +4,8 @@ import Image from "next/image";
 import { ArrowDown, Menu, Pause, Play, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const tools = [
   {
     name: "Prompt edit",
@@ -62,7 +64,7 @@ function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
   return (
     <a href="#top" className="brand-logo" aria-label="MOREU home">
       <Image
-        src={variant === "light" ? "/images/moreu-logo-white.png" : "/images/moreu-logo.png"}
+        src={`${basePath}${variant === "light" ? "/images/moreu-logo-white.png" : "/images/moreu-logo.png"}`}
         alt="MOREU"
         width={151}
         height={40}
@@ -79,7 +81,7 @@ function Header() {
       <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
         <Logo />
         <nav className="hidden items-center gap-9 text-[17px] md:flex" aria-label="Primary navigation">
-          <a className="nav-link" href="/work">Work</a>
+          <a className="nav-link" href={`${basePath}/work/`}>Work</a>
           <a className="nav-link" href="#platforms">Enterprise</a>
           <a className="nav-link" href="#start">Pricing</a>
           <a className="nav-link" href="#footer">Resources</a>
@@ -94,7 +96,7 @@ function Header() {
       </div>
       {open && (
         <nav className="absolute inset-x-0 top-[77px] flex flex-col gap-5 border-b border-black/10 bg-white px-6 py-7 text-2xl md:hidden">
-          {[["Work", "/work"], ["Enterprise", "#platforms"], ["Pricing", "#start"], ["Resources", "#footer"]].map(([label, href]) => (
+          {[["Work", `${basePath}/work/`], ["Enterprise", "#platforms"], ["Pricing", "#start"], ["Resources", "#footer"]].map(([label, href]) => (
             <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>
           ))}
         </nav>
@@ -116,7 +118,7 @@ function Hero() {
   const activeScene = heroScenes[scene];
   return (
     <section id="top" className="relative min-h-[700px] overflow-hidden bg-[#555b61] pt-[78px] text-white">
-      <Image src="/images/cinematic-valley.png" alt="Traveler in a cinematic mountain valley" fill priority className="object-cover opacity-45" />
+      <Image src={`${basePath}/images/cinematic-valley.png`} alt="Traveler in a cinematic mountain valley" fill priority className="object-cover opacity-45" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,22,25,.72),rgba(27,31,35,.22)_55%,rgba(12,15,17,.43))]" />
       <div className="relative mx-auto grid min-h-[622px] max-w-[1440px] grid-cols-1 gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:px-12 lg:py-10">
         <div className="flex flex-col justify-between">
@@ -127,7 +129,7 @@ function Hero() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#start" className="rounded-full bg-white/14 px-5 py-2.5 text-sm backdrop-blur-md transition hover:bg-white hover:text-black">Get started for free</a>
-              <a href="/work" className="rounded-full px-3 py-2.5 text-sm text-white/70 transition hover:text-white">See all workflows</a>
+              <a href={`${basePath}/work/`} className="rounded-full px-3 py-2.5 text-sm text-white/70 transition hover:text-white">See all workflows</a>
             </div>
           </div>
           <div className="mt-12 lg:mt-0" aria-label="Creative disciplines">
@@ -148,7 +150,7 @@ function Hero() {
           <div className={`workflow-card ${activeScene.tint}`} key={activeScene.name}>
             <div className="workflow-main">
               <span>Man walking on a trail</span>
-              <Image src="/images/cinematic-valley.png" alt="Source frame" fill className="object-cover" sizes="320px" />
+              <Image src={`${basePath}/images/cinematic-valley.png`} alt="Source frame" fill className="object-cover" sizes="320px" />
             </div>
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 720 520" fill="none" aria-hidden="true">
               <path d="M245 275 C360 275 360 95 486 95" stroke="rgba(255,255,255,.28)" />
@@ -162,7 +164,7 @@ function Hero() {
                 return (
               <div key={label} className={`workflow-output ${pos}`}>
                 <span>{label}</span>
-                <Image src="/images/cinematic-valley.png" alt="" fill className={`object-cover ${i === 0 ? "sepia" : i === 2 ? "hue-rotate-[170deg] saturate-50" : ""}`} sizes="220px" />
+                <Image src={`${basePath}/images/cinematic-valley.png`} alt="" fill className={`object-cover ${i === 0 ? "sepia" : i === 2 ? "hue-rotate-[170deg] saturate-50" : ""}`} sizes="220px" />
               </div>
                 );
               })()
@@ -194,7 +196,7 @@ function Partners() {
 function ToolVisual({ kind }: { kind: string }) {
   if (kind === "layers") return <div className="art layers-art"><div className="glass-face"/><span className="prompt-chip">Add lighting in the background</span></div>;
   if (kind === "poster") return <div className="art poster-art"><div className="poster-face">LOST<br/>VIBES</div><i/><i/><i/></div>;
-  if (kind === "maker") return <div className="art maker-art"><div className="maker-photo"/><div className="maker-grid"/></div>;
+  if (kind === "maker") return <div className="art maker-art"><div className="maker-photo" style={{ backgroundImage: `linear-gradient(120deg,transparent 0 30%,rgba(17,80,100,.2) 30%), url('${basePath}/images/cinematic-valley.png')` }}/><div className="maker-grid"/></div>;
   if (kind === "product") return <div className="art product-art"><div className="bottle"><span>MŌRA</span></div><i className="lemon one"/><i className="lemon two"/></div>;
   return <div className="art eye-art"><div className="iris"/></div>;
 }
@@ -260,7 +262,7 @@ function PlatformShowcase() {
             </ul>
           </div>
           <div className="relative m-3 min-h-[420px] overflow-hidden rounded-xl lg:m-6 lg:ml-0">
-            <Image src="/images/floating-sofa.png" alt="Floating sculptural leather sofa" fill className={`object-cover transition duration-700 ${active === "dev" ? "hue-rotate-[40deg] saturate-75" : active === "robotics" ? "grayscale" : ""}`} sizes="(max-width: 1024px) 100vw, 900px" />
+            <Image src={`${basePath}/images/floating-sofa.png`} alt="Floating sculptural leather sofa" fill className={`object-cover transition duration-700 ${active === "dev" ? "hue-rotate-[40deg] saturate-75" : active === "robotics" ? "grayscale" : ""}`} sizes="(max-width: 1024px) 100vw, 900px" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
             <p className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-4xl font-medium text-white sm:text-6xl">{content.title}</p>
             <span className="absolute bottom-6 left-6 rounded-full border border-white/35 bg-black/15 px-4 py-2 text-xs text-white backdrop-blur">Explore platform</span>
@@ -285,7 +287,7 @@ function CTA() {
           </div>
         </div>
         <div className="relative aspect-square overflow-hidden rounded-sm">
-          <Image src="/images/color-bird.png" alt="Colorful bird dissolving into particles" fill className="object-cover transition duration-700 hover:scale-[1.025]" sizes="(max-width: 1024px) 100vw, 660px" />
+          <Image src={`${basePath}/images/color-bird.png`} alt="Colorful bird dissolving into particles" fill className="object-cover transition duration-700 hover:scale-[1.025]" sizes="(max-width: 1024px) 100vw, 660px" />
         </div>
       </div>
     </section>
@@ -299,7 +301,7 @@ function Footer() {
         <h2 className="font-display text-[54px] leading-none sm:text-[86px]">Think it. Make it. Own it.</h2>
         <div className="mt-12 grid gap-10 border-t border-white/15 pt-8 sm:grid-cols-3">
           <p className="max-w-sm text-sm leading-6 text-white/45">MOREU gives visual ideas somewhere to go: into products, agents, campaigns, and finished design systems.</p>
-          <div className="text-sm leading-8 text-white/60"><a className="block hover:text-white" href="/work">Work</a><a className="block hover:text-white" href="#platforms">Platforms</a><a className="block hover:text-white" href="#start">Pricing</a></div>
+          <div className="text-sm leading-8 text-white/60"><a className="block hover:text-white" href={`${basePath}/work/`}>Work</a><a className="block hover:text-white" href="#platforms">Platforms</a><a className="block hover:text-white" href="#start">Pricing</a></div>
           <div className="sm:text-right"><Logo variant="light" /></div>
         </div>
         <p className="mt-16 text-xs text-white/25">© 2026 MOREU. All creative systems online.</p>
