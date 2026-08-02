@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { sitePath } from "@/lib/site-path";
 
 const filters = ["All", "Exhibitions", "Collectibles", "Collaborations"];
 
@@ -11,7 +12,7 @@ function MoreuMark() {
   return (
     <Link href="/" className="work-mark" aria-label="Back to MOREU home">
       <Image
-        src="/images/moreu-logo.png"
+        src={sitePath("/images/moreu-logo.png")}
         alt="MOREU"
         width={128}
         height={34}
@@ -74,7 +75,7 @@ function IndexSection() {
           <div className="work-digital-grid">
             <article className="work-project-card work-project-primary" data-reveal>
               <div className="work-media portrait">
-                <Image src="/images/work-new-life.png" alt="Translucent profile sculpture in a sunlit gallery" fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 36vw" />
+                <Image src={sitePath("/images/work-new-life.png")} alt="Translucent profile sculpture in a sunlit gallery" fill priority className="object-cover" sizes="(max-width: 768px) 100vw, 36vw" />
               </div>
               <ArtworkCaption title="New Life (2026)" type="Digital artwork · Short film" />
             </article>
@@ -93,7 +94,7 @@ function IndexSection() {
           <h2>PHYSICAL</h2>
           <article className="work-project-card" data-reveal>
             <div className="work-media landscape">
-              <Image src="/images/work-skyward.png" alt="Blue pavilion sculpture on a salt plain at sunset" fill className="object-cover" sizes="(max-width: 768px) 100vw, 27vw" />
+              <Image src={sitePath("/images/work-skyward.png")} alt="Blue pavilion sculpture on a salt plain at sunset" fill className="object-cover" sizes="(max-width: 768px) 100vw, 27vw" />
             </div>
             <ArtworkCaption title="SkyWard (2026)" type="Land art installation" />
           </article>
@@ -115,7 +116,7 @@ function FlowNode({ className, label, prompt, image, faded }: NodeProps) {
     <div className={`flow-node ${className} ${faded ? "faded" : ""}`} data-reveal>
       <div className="flow-node-title"><span>{label}</span><i /></div>
       {prompt && <p>{prompt}</p>}
-      {image && <div className="flow-node-image"><Image src="/images/work-botanical.png" alt="Surreal translucent botanical sculpture" fill className="object-cover" sizes="200px" /></div>}
+      {image && <div className="flow-node-image"><Image src={sitePath("/images/work-botanical.png")} alt="Surreal translucent botanical sculpture" fill className="object-cover" sizes="200px" /></div>}
       {image && <div className="flow-node-footer"><span>1024 × 1024</span><button>Run</button></div>}
     </div>
   );
@@ -168,7 +169,7 @@ export default function WorkPage() {
       <WorkHeader />
       <IndexSection />
       <section className="work-museum" id="museum" data-reveal>
-        <Image src="/images/work-museum.png" alt="Light-filled contemporary art museum gallery" fill className="work-museum-image object-cover" sizes="100vw" data-parallax />
+        <Image src={sitePath("/images/work-museum.png")} alt="Light-filled contemporary art museum gallery" fill className="work-museum-image object-cover" sizes="100vw" data-parallax />
       </section>
       <Workflow />
       <ProjectStory />
