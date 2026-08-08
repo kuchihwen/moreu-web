@@ -60,6 +60,13 @@ const heroScenes = [
   { name: "Architecture", tint: "hero-tint-architecture", labels: ["Interior study", "Facade option", "Night exterior"] },
 ];
 
+const partners = [
+  { name: "SPACS ART", src: "/images/partners/spacs-art.png", width: 1800, height: 306, displayWidth: 178 },
+  { name: "KONST", src: "/images/partners/konst.png", width: 1800, height: 346, displayWidth: 158 },
+  { name: "FOREU", src: "/images/partners/foreu.png", width: 1800, height: 535, displayWidth: 132 },
+  { name: "HORIZON AI", src: "/images/partners/bridge-mark.png", width: 1800, height: 177, displayWidth: 190 },
+];
+
 function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
   return (
     <a href="#top" className="brand-logo" aria-label="MOREU home">
@@ -128,7 +135,7 @@ function Hero() {
               Teams from Pentagram to Lionsgate use MOREU to explore possibilities and amplify their creative output.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#start" className="rounded-full bg-white/14 px-5 py-2.5 text-sm backdrop-blur-md transition hover:bg-white hover:text-black">Get started for free</a>
+              <a href={`${basePath}/generate/`} className="rounded-full bg-white/14 px-5 py-2.5 text-sm backdrop-blur-md transition hover:bg-white hover:text-black">Get started for free</a>
               <a href={`${basePath}/work/`} className="rounded-full px-3 py-2.5 text-sm text-white/70 transition hover:text-white">See all workflows</a>
             </div>
           </div>
@@ -185,9 +192,19 @@ function Partners() {
   return (
     <section className="border-b border-black/5 bg-white px-5 py-8 text-center" data-reveal>
       <p className="text-xs text-black/35">We partner with the world&apos;s leading organizations to advance their industries:</p>
-      <div className="mx-auto mt-7 flex max-w-[900px] flex-wrap items-center justify-center gap-x-12 gap-y-5 text-[17px] font-medium tracking-tight text-black/75 sm:gap-x-16">
-        <span className="font-display text-xl italic">amazon</span><span className="grid grid-cols-2 gap-0.5">{[0,1,2,3].map(i => <i key={i} className="block h-3.5 w-3.5 bg-black" />)}</span>
-        <span>Robinhood ◒</span><span className="font-medium">shutterstock</span><span className="font-display text-2xl">D&amp;G</span><span className="text-xs leading-3">Wieden<br/>Kennedy</span>
+      <div className="mx-auto mt-7 grid max-w-[820px] grid-cols-2 items-center gap-x-8 gap-y-7 sm:grid-cols-4 sm:gap-x-12">
+        {partners.map((partner) => (
+          <div key={partner.name} className="flex h-10 items-center justify-center">
+            <Image
+              src={`${basePath}${partner.src}`}
+              alt={partner.name}
+              width={partner.width}
+              height={partner.height}
+              style={{ width: partner.displayWidth, height: "auto" }}
+              className="max-h-10 max-w-full object-contain"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );
