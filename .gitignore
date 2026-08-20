@@ -16,6 +16,7 @@
 # Logs and local tooling output
 *.log
 *.tsbuildinfo
+/.preview-*.png
 
 # Hosting and editor metadata
 .vercel
